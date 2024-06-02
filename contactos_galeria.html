@@ -32,17 +32,17 @@
             </div>
       
             <div class="modal-body p-5 pt-0">
-              <form class="">
+              <form class="" id="myForm">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control rounded-3" id="floatingInput" placeholder="Nombre" onkeydown="return /[a-zA-Z]/i.test(event.key)" required>
-                    <label for="floatingInput">Nombre</label>
+                    <input type="text" class="form-control rounded-3" id="inputNombre" placeholder="Nombre" onblur="validationName(this);">
+                    <label for="inputNombre">Nombre</label>
                   </div>
                 <div class="form-floating mb-3">
-                  <input type="email" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com" required>
-                  <label for="floatingInput">Correo Electronico</label>
+                  <input type="email" class="form-control rounded-3" id="inputCorreo" placeholder="name@example.com" onblur="validationEmail(this);">
+                  <label for="inputCorreo">Correo Electronico</label>
                 </div>
                 <div class="floating mb-3">
-                    <select class="form-select" aria-label="Default select example" required>
+                    <select id="tipoDeSolicitud" class="form-select" aria-label="Default select example">
                         <option selected value="">Tipo de solicitud</option>
                         <option value="1">Compra</option>
                         <option value="2">Venta</option>
@@ -52,7 +52,7 @@
 
                 <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">Mensaje</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" required rows="3"></textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                   </div>
 
                 <div class="form-floating mb-3">
@@ -78,6 +78,40 @@
         </footer>
 
     </div>
+
+
+
+  <script>
+    document.getElementById('myForm').addEventListener('submit', function(event) {
+        // Aquí llamando al dom de cada input, tienes que validar el contenido de cada input. Te dejaré el ejemplo del primer input:
+        var inputNombre = document.getElementById('inputNombre');
+        if (inputNombre.value.trim() === "") {
+            alert("Campo de nombre requerido"); // esta linea hará que aparezca un texto en pantalla para decir que el campo es requerido
+            event.preventDefault(); // esta linea hace que NO se haga el envio del formulario, ya que existen campos incompletos.
+            return; // esto hace que la función llegue hasta aquí y no continue su ejecución.
+        }
+        // acá deberías hacer algo parecido para todos los demas.
+        var inputCorreo = document.getElementById('inputCorreo');
+        if (inputCorreo.value.trim() === "") {
+            alert("Campo de correo requerido");
+            event.preventDefault();
+            return;
+        }
+        console.log("Todos los campos validados están OK! continuando submit");
+    });
+
+    function validationName(element) {
+        const input = element.value;
+        // aquí debes agregar alguna lógica para validar el name o algo realmente lo que quieras.
+        }
+
+    function validationEmail(element) {
+        const input = element.value;
+        // aquí debes agregar alguna lógica para validar el email o algo realmente lo que quieras.
+    }
+  </script>
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
